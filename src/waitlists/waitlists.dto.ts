@@ -1,7 +1,6 @@
 import { IsString, IsOptional, IsBoolean } from 'class-validator';
-import { Prisma } from '@db';
 
-export class CreateWaitlistDto implements Prisma.WaitlistCreateInput {
+export class CreateWaitlistDto {
   @IsString()
   name: string;
 
@@ -10,7 +9,7 @@ export class CreateWaitlistDto implements Prisma.WaitlistCreateInput {
   active?: boolean | undefined;
 }
 
-export class PatchWaitlistDto implements Prisma.WaitlistUpdateInput {
+export class PatchWaitlistDto {
   @IsOptional()
   @IsString()
   name: string;

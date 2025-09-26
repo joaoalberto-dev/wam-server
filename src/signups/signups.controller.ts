@@ -1,40 +1,13 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { SignupsService } from './signups.service';
+import { CreateSignupDto } from './signups.dto';
 
 @Controller('signups')
 export class SignupsController {
   constructor(private readonly signupsService: SignupsService) {}
 
   @Post()
-  create(@Body() createSignupDto: unknown) {
+  create(@Body() createSignupDto: CreateSignupDto) {
     return this.signupsService.create(createSignupDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.signupsService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.signupsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSignupDto: unknown) {
-    return this.signupsService.update(+id, updateSignupDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.signupsService.remove(+id);
   }
 }

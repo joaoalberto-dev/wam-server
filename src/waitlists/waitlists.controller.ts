@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { WaitlistsService } from './waitlists.service';
 import { CreateWaitlistDto, PatchWaitlistDto } from './waitlists.dto';
-import { WaitlistEntity } from './waitlist.entity';
+import { WaitlistEntity } from './waitlists.entity';
 
 @Controller('waitlists')
 export class WaitlistsController {

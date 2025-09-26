@@ -12,7 +12,11 @@ export class WaitlistsService {
   }
 
   findAll() {
-    return this.db.waitlist.findMany();
+    return this.db.waitlist.findMany({
+      include: {
+        Signup: true,
+      },
+    });
   }
 
   findOne(id: number) {
