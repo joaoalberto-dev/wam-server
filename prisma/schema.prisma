@@ -28,3 +28,10 @@ model Signup {
   waitlist   Waitlist @relation(fields: [waitlistId], references: [id])
   waitlistId Int
 }
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String
+  password String
+}
