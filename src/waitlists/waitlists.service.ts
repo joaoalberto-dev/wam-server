@@ -1,12 +1,13 @@
 import { Waitlist } from '@db';
 import { Injectable } from '@nestjs/common';
 import { DBService } from 'src/db/db.service';
+import { CreateWaitlistDto, PatchWaitlistDto } from './waitlists.dto';
 
 @Injectable()
 export class WaitlistsService {
   constructor(private db: DBService) {}
 
-  create(data: Waitlist): Promise<Waitlist> {
+  create(data: CreateWaitlistDto): Promise<Waitlist> {
     return this.db.waitlist.create({ data });
   }
 
@@ -22,7 +23,7 @@ export class WaitlistsService {
     });
   }
 
-  update(id: number, data: Partial<Waitlist>) {
+  update(id: number, data: PatchWaitlistDto) {
     return this.db.waitlist.update({
       data,
       where: { id },

@@ -8,20 +8,22 @@ import {
   Delete,
 } from '@nestjs/common';
 import { WaitlistsService } from './waitlists.service';
-import type { Waitlist } from '@db';
+import { CreateWaitlistDto, PatchWaitlistDto } from './waitlists.dto';
+import { WaitlistEntity } from './waitlist.entity';
 
 @Controller('waitlists')
 export class WaitlistsController {
   constructor(private readonly waitlistsService: WaitlistsService) {}
 
   @Post()
-  create(@Body() createWaitlistDto: Waitlist) {
+  create(@Body() createWaitlistDto: CreateWaitlistDto) {
     return this.waitlistsService.create(createWaitlistDto);
   }
 
   @Get()
-  findAll() {
-    return this.waitlistsService.findAll();
+  async findAll() {
+    const list = await this.waitlistsService.findAll();
+    return list.map((waitlist) => new WaitlistEntity(waitlist));
   }
 
   @Get(':id')
@@ -30,7 +32,7 @@ export class WaitlistsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() data: Partial<Waitlist>) {
+  update(@Param('id') id: string, @Body() data: PatchWaitlistDto) {
     return this.waitlistsService.update(+id, data);
   }
 
